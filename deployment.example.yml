@@ -1,0 +1,6 @@
+version: 1.2
+
+stacks:
+    id: 0x123
+    path: ./test
+    git-url: https://gitlab.com/my/demo/project.git

@@ -38,6 +38,7 @@
         "@types/express": "4.17.6",
         "@types/jest": "25.1.2",
         "@types/socket.io-client": "1.4.32",
+        "@types/yaml": "1.2.0",
         "@typescript-eslint/eslint-plugin": "2.19.2",
         "@typescript-eslint/parser": "2.19.2",
         "chokidar-cli": "2.1.0",
@@ -74,6 +75,7 @@
         "body-parser": "1.19.0",
         "cors": "2.8.5",
         "express": "4.17.1",
-        "http": "0.0.1-security"
+        "http": "0.0.1-security",
+        "yaml": "1.8.3"
     }
 }

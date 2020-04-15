@@ -1,8 +1,13 @@
+import fs from 'fs';
+import yaml from 'yaml';
 import { Router } from 'express';
 
-const router = Router();
+const deploymentFile = fs.readFileSync('./deployment.yml', 'utf8');
+const deployment = yaml.parse(deploymentFile);
+console.log(deployment);
 
-router.get('/test', (req, res) => {
+const router = Router();
+router.get('/test', (_req, res) => {
     res.send(200);
 });
 
