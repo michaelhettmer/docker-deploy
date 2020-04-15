@@ -20,6 +20,7 @@
         "commitlint:ci": "commitlint-circle",
         "build": "tsc",
         "build:watch": "chokidar --initial --verbose \"src/**/*\" -c \"npm run build && npm run restart\"",
+        "build:docker": "docker build -t michaelhettmer/docker-deploy .",
         "lint": "eslint . --ext '.js,.jsx,.ts,.tsx,.json,.jsonc'",
         "lint:circleci": "docker run -w /data --rm -v $(pwd):/data circleci/circleci-cli:0.1.6949-alpine config validate",
         "lint:ci": "npm run lint -- --format junit --output-file ./reports/eslint/results.xml",
