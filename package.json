@@ -14,7 +14,8 @@
     },
     "scripts": {
         "start": "node dist/index.js",
-        "start:docker": "docker run -d -v /Users/mht/src/docker-deploy/deployment.yml:/home/node/app/deployment.yml -p 8888:8888 docker-deploy",
+        "start:docker": "docker run --name docker-deploy -d -v /Users/mht/src/docker-deploy/docker-compose.yml:/home/node/app/docker-compose.yml -v /Users/mht/src/docker-deploy/deployment.yml:/home/node/app/deployment.yml -v /var/run/docker.sock:/var/run/docker.sock -p 8888:8888 michaelhettmer/docker-deploy",
+        "start:docker:it": "docker exec -it docker-deploy sh",
         "develop": "npm start",
         "restart": "pkill -f dist/index.js; npm start",
         "commitlint": "commitlint",
@@ -39,6 +40,7 @@
         "@types/cors": "2.8.6",
         "@types/express": "4.17.6",
         "@types/jest": "25.1.2",
+        "@types/morgan": "1.9.0",
         "@types/socket.io-client": "1.4.32",
         "@types/yaml": "1.2.0",
         "@typescript-eslint/eslint-plugin": "2.19.2",
@@ -76,8 +78,10 @@
     "dependencies": {
         "body-parser": "1.19.0",
         "cors": "2.8.5",
+        "execa": "4.0.0",
         "express": "4.17.1",
         "http": "0.0.1-security",
+        "morgan": "1.10.0",
         "tslib": "1.11.1",
         "yaml": "1.8.3"
     }
