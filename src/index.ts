@@ -3,6 +3,7 @@ import { Server as HttpServer } from 'http';
 import bodyParser from 'body-parser';
 import cors, { CorsOptions } from 'cors';
 import { serverPort } from './config';
+import router from './router';
 
 const whitelist = ['http://localhost:3000', 'http://localhost:8000'];
 
@@ -20,6 +21,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors(CorsWhitelist));
+app.use(router);
 
 const server = new HttpServer(app);
 server.listen(serverPort, () => {
