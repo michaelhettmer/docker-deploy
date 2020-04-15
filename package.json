@@ -1,67 +1,79 @@
 {
-  "name": "docker-deploy",
-  "version": "1.0.0",
-  "description": "Automated docker stand and container deployment manager",
-  "author": "MichaelHettmer",
-  "license": "MIT",
-  "homepage": "https://github.com/MichaelHettmer/docker-deploy#readme",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/MichaelHettmer/docker-deploy.git"
-  },
-  "bugs": {
-    "url": "https://github.com/MichaelHettmer/docker-deploy/issues"
-  },
-  "scripts": {
-    "commitlint": "commitlint",
-    "commitlint:ci": "commitlint-circle",
-    "build": "tsc",
-    "build:watch": "chokidar --initial --verbose \"src/**/*\" -c \"npm run build\"",
-    "lint": "eslint . --ext '.js,.jsx,.ts,.tsx,.json,.jsonc'",
-    "lint:circleci": "docker run -w /data --rm -v $(pwd):/data circleci/circleci-cli:0.1.6949-alpine config validate",
-    "lint:ci": "npm run lint -- --format junit --output-file ./reports/eslint/results.xml",
-    "lint:fix": "npm run lint -- --fix",
-    "test": "jest",
-    "test:coverage": "npm run test -- --coverage --watchAll=false",
-    "test:ci": "CI=true JEST_JUNIT_OUTPUT_DIR=./reports/jest JEST_JUNIT_OUTPUT_NAME=results.xml npm run test:coverage --runInBand --reporters=\"default\" --reporters=\"jest-junit\"",
-    "validate": "npm-run-all lint test build"
-  },
-  "devDependencies": {
-    "@commitlint/cli": "8.3.5",
-    "@commitlint/config-conventional": "8.3.4",
-    "@semantic-release/changelog": "5.0.0",
-    "@semantic-release/git": "9.0.0",
-    "commitlint-circle": "1.0.0",
-    "husky": "4.2.3",
-    "lint-staged": "10.0.7",
-    "semantic-release": "17.0.3",
-    "@types/jest": "25.1.2",
-    "@typescript-eslint/eslint-plugin": "2.19.2",
-    "@typescript-eslint/parser": "2.19.2",
-    "chokidar-cli": "2.1.0",
-    "eslint": "6.8.0",
-    "eslint-config-prettier": "6.10.0",
-    "eslint-plugin-json": "2.0.1",
-    "eslint-plugin-prettier": "3.1.2",
-    "jest": "25.1.0",
-    "jest-junit": "10.0.0",
-    "jest-mock-console": "1.0.0",
-    "npm-run-all": "4.1.5",
-    "prettier": "1.19.1",
-    "ts-jest": "25.2.0",
-    "typescript": "3.7.5"
-  },
-  "engines": {
-    "node": ">=8.0.0"
-  },
-  "keywords": [
-    "node",
-    "app",
-    "typescript"
-  ],
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ]
+    "name": "docker-deploy",
+    "version": "1.0.0",
+    "description": "Automated docker stand and container deployment manager",
+    "author": "MichaelHettmer",
+    "license": "MIT",
+    "homepage": "https://github.com/MichaelHettmer/docker-deploy#readme",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/MichaelHettmer/docker-deploy.git"
+    },
+    "bugs": {
+        "url": "https://github.com/MichaelHettmer/docker-deploy/issues"
+    },
+    "scripts": {
+        "start": "node dist/index.js",
+        "develop": "npm start",
+        "restart": "pkill -f dist/index.js; npm start",
+        "commitlint": "commitlint",
+        "commitlint:ci": "commitlint-circle",
+        "build": "tsc",
+        "build:watch": "chokidar --initial --verbose \"src/**/*\" -c \"npm run build && npm run restart\"",
+        "lint": "eslint . --ext '.js,.jsx,.ts,.tsx,.json,.jsonc'",
+        "lint:circleci": "docker run -w /data --rm -v $(pwd):/data circleci/circleci-cli:0.1.6949-alpine config validate",
+        "lint:ci": "npm run lint -- --format junit --output-file ./reports/eslint/results.xml",
+        "lint:fix": "npm run lint -- --fix",
+        "test": "jest",
+        "test:coverage": "npm run test -- --coverage --watchAll=false",
+        "test:ci": "CI=true JEST_JUNIT_OUTPUT_DIR=./reports/jest JEST_JUNIT_OUTPUT_NAME=results.xml npm run test:coverage --runInBand --reporters=\"default\" --reporters=\"jest-junit\"",
+        "validate": "npm-run-all lint test build"
+    },
+    "devDependencies": {
+        "@commitlint/cli": "8.3.5",
+        "@commitlint/config-conventional": "8.3.4",
+        "@semantic-release/changelog": "5.0.0",
+        "@semantic-release/git": "9.0.0",
+        "@types/cors": "2.8.6",
+        "@types/express": "4.17.6",
+        "@types/jest": "25.1.2",
+        "@types/socket.io-client": "1.4.32",
+        "@typescript-eslint/eslint-plugin": "2.19.2",
+        "@typescript-eslint/parser": "2.19.2",
+        "chokidar-cli": "2.1.0",
+        "commitlint-circle": "1.0.0",
+        "eslint": "6.8.0",
+        "eslint-config-prettier": "6.10.0",
+        "eslint-plugin-json": "2.0.1",
+        "eslint-plugin-prettier": "3.1.2",
+        "husky": "4.2.3",
+        "jest": "25.1.0",
+        "jest-junit": "10.0.0",
+        "jest-mock-console": "1.0.0",
+        "lint-staged": "10.0.7",
+        "npm-run-all": "4.1.5",
+        "prettier": "1.19.1",
+        "semantic-release": "17.0.3",
+        "ts-jest": "25.2.0",
+        "typescript": "3.7.5"
+    },
+    "engines": {
+        "node": ">=8.0.0"
+    },
+    "keywords": [
+        "node",
+        "app",
+        "typescript"
+    ],
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "dependencies": {
+        "body-parser": "1.19.0",
+        "cors": "2.8.5",
+        "express": "4.17.1",
+        "http": "0.0.1-security"
+    }
 }
