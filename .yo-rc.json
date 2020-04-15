@@ -1,0 +1,15 @@
+{
+  "generator-mht": {
+    "promptValues": {
+      "ci": "CircleCI",
+      "repo": "GitHub",
+      "repoUserName": "MichaelHettmer",
+      "repoName": "docker-deploy",
+      "authorName": "Michael Hettmer",
+      "moduleName": "docker-deploy",
+      "description": "Automated docker stand and container deployment manager",
+      "isLib": false,
+      "vscode": true
+    }
+  }
+}
