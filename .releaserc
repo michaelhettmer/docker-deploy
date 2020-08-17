@@ -19,6 +19,12 @@
             }
         ],
         [
+            "semantic-release-docker",
+            {
+                "name": "michaelhettmer/docker-deploy"
+            }
+        ],
+        [
             "@semantic-release/git",
             {
                 "assets": [
@@ -38,6 +44,10 @@
                     {
                         "path": "dist/*.tgz",
                         "label": "NPM tarball"
+                    },
+                    {
+                        "path": "docker_michaelhettmer_docker-deploy.tar.gz",
+                        "label": "Docker image"
                     }
                 ],
                 "assignees": [

@@ -14,7 +14,7 @@ jobs:
                       - v1-dependencies-{{ checksum "package.json" }}
                       - v1-dependencies-
             - run:
-                  name: Install Dependencies
+                  name: Install v1-dependencies
                   command: npm ci
             - save_cache:
                   paths:
@@ -91,13 +91,37 @@ jobs:
             - store_artifacts:
                   path: reports
 
+    build-docker:
+        docker:
+            - image: circleci/node:12.16.2
+        steps:
+            - attach_workspace:
+                  at: ~/project
+            - setup_remote_docker:
+                  docker_layer_caching: false
+            - run:
+                  name: Build Docker Image
+                  command: npm run build:docker
+            - run:
+                  name: Persist Docker Image
+                  command: docker save michaelhettmer/docker-deploy | gzip > docker_michaelhettmer_docker-deploy.tar.gz
+            - persist_to_workspace:
+                  root: ~/project
+                  paths:
+                      - docker_michaelhettmer_docker-deploy.tar.gz
+
     release:
         docker:
             - image: circleci/node:12.16.2
         steps:
             - attach_workspace:
                   at: ~/project
-            - run: npx semantic-release
+            - run:
+                  name: Load Docker Image
+                  command: docker load -i docker_michaelhettmer_docker-deploy.tar.gz
+            - run:
+                  name: Release Docker Image
+                  command: npx semantic-release
 
 workflows:
     build:
@@ -116,6 +140,11 @@ workflows:
                   requires:
                       - test
             - build:
+                  requires:
+                      - lint
+                      - commitlint
+                      - test
+            - build-docker:
                   requires:
                       - lint
                       - commitlint

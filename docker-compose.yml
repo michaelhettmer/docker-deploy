@@ -1,0 +1,11 @@
+version: '2'
+services:
+    hello_world:
+        image: ubuntu
+        command: [/bin/echo, 'Hello world']
+
+    hello:
+        image: hashicorp/http-echo
+        command: ['-text', 'Hello, World!']
+        ports:
+            - 9999:5678
