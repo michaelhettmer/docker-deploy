@@ -110,3 +110,6 @@ temp/
 
 # End of https://www.gitignore.io/api/node
 deployment.yml
+
+# eslint / prettier reports
+reports
