@@ -1,4 +1,4 @@
-FROM node:12.18.3-alpine3.11
+FROM node:16.13.0-alpine3.11
 
 COPY . /src
 WORKDIR /src
@@ -8,7 +8,7 @@ RUN npm ci
 ENV NODE_ENV=production
 RUN npm run build
 
-FROM node:12.18.3-alpine3.11
+FROM node:16.13.0-alpine3.11
 
 ENV NODE_ENV=production
 WORKDIR /home/node/app
